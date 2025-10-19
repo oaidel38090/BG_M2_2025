@@ -1,0 +1,14 @@
+.ipynb_checkpoints
+.ipython
+.jupyter
+.local
+.npm
+.DS_Store
+**/.DS_Store
+**/.ipynb_checkpoints
+**/.ipython
+**/.jupyter
+**/.local
+**/.npm
+MES_TPS/*
+!.gitkeep
