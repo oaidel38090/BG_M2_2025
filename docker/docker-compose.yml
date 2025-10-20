@@ -532,56 +532,6 @@ services:
     networks:
       - bigdata
 
-##################################
-# Configuration du cluster SPARK #
-##################################
-
-  smaster:
-    image: guizmo38/spark-master:3.2.1-hadoop3.2-python3.7
-    container_name: smaster
-    depends_on:
-      - namenode
-      - datanode1
-      - datanode2
-    ports:
-      - "8080:8080"
-      - "7077:7077"
-    environment:
-      - INIT_DAEMON_STEP=setup_spark
-      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
-    volumes:
-      - smaster_volume:/spark
-    networks:
-      - bigdata
-  sworker1:
-    image: guizmo38/spark-worker:3.2.1-hadoop3.2-python3.7
-    container_name: sworker1
-    depends_on:
-      - smaster
-    ports:
-      - "8081:8081"
-    environment:
-      - "SPARK_MASTER=spark://smaster:7077"
-      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
-      - "SPARK_WORKER_CORES=1"
-      - "SPARK_WORKER_MEMORY=1024m"
-    networks:
-      - bigdata
-  sworker2:
-    image: guizmo38/spark-worker:3.2.1-hadoop3.2-python3.7
-    container_name: sworker2
-    depends_on:
-      - smaster
-    ports:
-      - "8082:8081"
-    environment:
-      - "SPARK_MASTER=spark://smaster:7077"
-      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
-      - "SPARK_WORKER_CORES=1"
-      - "SPARK_WORKER_MEMORY=1024m"
-    networks:
-      - bigdata
-
 
 
 ####################################
