@@ -18,7 +18,7 @@ services:
     container_name: 'jupyter'
     volumes:
       - ../:/home/jovyan/bigdata
-#      - /home/centos/formation/bigdata/docker/data:/home/jovyan/data
+      - ./data:/home/jovyan/data
     ports:
       - "8888:8888"
       - "4040:4040"
